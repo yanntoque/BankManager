@@ -2,13 +2,13 @@
 
 This project aims to understand Java ORM.
 
-###Prerequisite : 
+### Prerequisite : 
 
 Netbeans 8.2
 MySQL 5.7 
 
 
-##Steps to follow : 
+## Steps to follow : 
 
 1. Use Netbeans IDE
 2. Go to Tool > Server then Add a Glassfish Server with the default configuration

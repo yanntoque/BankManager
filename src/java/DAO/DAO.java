@@ -14,13 +14,13 @@ import javax.persistence.*;
  */
 public class DAO<T> {
 
-    @PersistenceContext(unitName = "BankManagerPU")
-    private EntityManager em;
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("BankManagerPU");
+    EntityManager em = emf.createEntityManager();
 
     public void create(T entity) {
         em.getTransaction().begin();
         em.persist(entity);
-        em.getTransaction();
+        em.getTransaction().commit();
         em.close();
     }
 }

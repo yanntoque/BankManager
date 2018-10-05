@@ -12,7 +12,7 @@ import javax.persistence.*;
  * @author Valentin LECOUPLE & Yann Toqué
  */
 @Entity
-public class Account {
+public class Account implements BeanInterface {
     /**
      * Numéro du compte. PK de la table
      */
@@ -96,6 +96,9 @@ public class Account {
     public void setTotalMoney(double totalMoney) {
         this.totalMoney = totalMoney;
     }
-    
-    
+
+    @Override
+    public Object getPrimaryKey() {
+       return getAccountNumber();
+    }
 }

@@ -16,11 +16,62 @@ public class DAO<T> {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("BankManagerPU");
     EntityManager em = emf.createEntityManager();
+    
+    /**
+     * Permet 
+     */
+    public void close(){
+        em.close();
+    }
 
-    public void create(T entity) {
+    /**
+     * Permet de créer un tuple dans la base de données
+     *
+     * @param entity
+     * @throws java.lang.Exception
+     */
+    public void create(T entity) throws Exception {
         em.getTransaction().begin();
         em.persist(entity);
         em.getTransaction().commit();
-        em.close();
+        
     }
+
+    /**
+     * Permet de modifier un tuple dans la base données
+     *
+     * @param entity
+     */
+    public void update(T entity) {
+        em.getTransaction().begin();
+        em.merge(entity);
+        em.getTransaction().commit();
+        
+    }
+
+    /**
+     * Permet de supprimer un tuple de la base données
+     *
+     * @param entity
+     */
+    public void delete(T entity) {
+        em.getTransaction().begin();
+        em.remove(entity);
+        em.getTransaction().commit();
+        
+    }
+
+    /**
+     * Permet de trouver un tuple par sa clé primaire dans la base de données
+     *
+     * @param entity
+     */
+    public Object findByPrimaryKey(T entity, Object primaryKey) {
+        em.getTransaction().begin();
+        Object o = em.find(entity.getClass(), primaryKey);
+        em.getTransaction().commit();
+        
+        return o;
+    } 
+
 }

@@ -103,4 +103,17 @@ public class Account implements BeanInterface {
     public Object getPrimaryKey() {
        return getAccountNumber();
     }
+    
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(String.format("Account: %s", this.getAccountNumber()));
+        sb.append(String.format("BankBranch: %s", this.getBankBranch().toString()));
+        sb.append(String.format("IBAN: %s", this.getIBAN()));
+        sb.append(String.format("Label: ", this.getLabel()));
+        sb.append(String.format("Total money: %s", this.getTotalMoney()));
+        
+        return sb.toString();
+    }
 }

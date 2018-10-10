@@ -11,6 +11,7 @@ import beans.BankBranch;
 import beans.Client;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -70,19 +71,20 @@ public class bankManagerServlet extends HttpServlet {
         String maClasseString = request.getParameter("class");
         String primaryKey = request.getParameter("pk");
 
-        switch (maClasseString) {
-            case "Account":
-                DAO<Account> daoAccout = new DAO();
-                break;
-            case "BankBranch":
-                DAO<BankBranch> daoBankBranch = new DAO();
-                break;
-            case "Client":
-                DAO<Client> daoClient = new DAO();
-                break;
-        }
+        Class maClasse;
+        Class[] paramTypes = new Class[1];
+        paramTypes[0] = String.class;
 
-        processRequest(request, response);
+        maClasse = Class.forName(maClasseString);
+        Method searchMethode = maClasse.getMethod("search", paramTypes);
+
+        Account obj = (Account)searchMethode.invoke(null, primaryKey);
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        out.println(obj.getIBAN());
+        //processRequest(request, response);
     }
 
     /**

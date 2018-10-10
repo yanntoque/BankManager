@@ -108,11 +108,11 @@ public class Account implements BeanInterface {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         
-        sb.append(String.format("Account: %s", this.getAccountNumber()));
-        sb.append(String.format("BankBranch: %s", this.getBankBranch().toString()));
-        sb.append(String.format("IBAN: %s", this.getIBAN()));
-        sb.append(String.format("Label: ", this.getLabel()));
-        sb.append(String.format("Total money: %s", this.getTotalMoney()));
+        sb.append(String.format("Account: %s%s", this.getAccountNumber(), System.lineSeparator()));
+        sb.append(String.format("BankBranch: %s%s", this.getBankBranch().toString(), System.lineSeparator()));
+        sb.append(String.format("IBAN: %s%s", this.getIBAN(), System.lineSeparator()));
+        sb.append(String.format("Label: %s%s", this.getLabel(), System.lineSeparator()));
+        sb.append(String.format("Total money: %s%s", this.getTotalMoney(), System.lineSeparator()));
         
         return sb.toString();
     }

@@ -65,8 +65,8 @@ public class BankBranch implements BeanInterface {
     public String toString(){
         StringBuilder sb = new StringBuilder();
                 
-        sb.append(String.format("Code: %s", this.getCode()));
-        sb.append(String.format("Adresse: %s", this.getAddress()));
+        sb.append(String.format("Code: %s%s", this.getCode(), System.lineSeparator()));
+        sb.append(String.format("Adresse: %s%s", this.getAddress(), System.lineSeparator()));
 
         
         return sb.toString();

@@ -72,18 +72,6 @@ public class Main {
             DAOClient.update(client);
             DAOClient.update(client2);
 
-            /*      
-            BankBranch bb = (BankBranch) DAOBankBranch.findByPrimaryKey(bankBranch, "4586");
-            bb.setAddress("adresse modifiée x4");
-            DAOBankBranch.update(bb);*/
- /*    List<Client> lstClient = DAOClient.findAll(new Client());
-            
-            for(Client c : lstClient){
-            System.out.println(c.toString());
-            }*/
- /*DAOAccount.create(account2);
-            
-            DAOClient*/
             for (Account acc : lstAccount) {
                 System.out.println(acc.toString());
             }
@@ -91,7 +79,7 @@ public class Main {
             DAOBankBranch.close();
             DAOAccount.close();
             DAOClient.close();
-
+            
         } catch (Exception e) {
             System.err.println("Impossible de créer un tuple.");
         }

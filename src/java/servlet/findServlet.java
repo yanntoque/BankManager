@@ -11,8 +11,12 @@ import beans.BankBranch;
 import beans.Client;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -27,8 +31,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author Yann Toqué
  *
  */
-@WebServlet(name = "bankManagerServlet", urlPatterns = {"/bankManagerServlet"})
-public class bankManagerServlet extends HttpServlet {
+@WebServlet(name = "findServlet", urlPatterns = {"/findServlet"})
+public class findServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -69,8 +73,8 @@ public class bankManagerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String maClasseString = request.getParameter("class");
-        String primaryKey = request.getParameter("pk");
+        String maClasseString = request.getParameter("rechercheClass");
+        String primaryKey = request.getParameter("recherchePk");
         System.out.println(maClasseString + primaryKey);
 
         Class maClasse;
@@ -78,33 +82,29 @@ public class bankManagerServlet extends HttpServlet {
         paramTypes[0] = String.class;
 
         try {
-            maClasse = Class.forName("Service."+maClasseString);
+            maClasse = Class.forName("Service." + maClasseString);
             Object classeInstance = maClasse.newInstance();
             Method searchMethode;
-            searchMethode = maClasse.getMethod("search", paramTypes);
-
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-
-            out.println(searchMethode.invoke(classeInstance, primaryKey).toString());
-        } catch (ClassNotFoundException ex ) {
-            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            searchMethode = maClasse.getMethod("search", paramTypes);   
             
+            request.setAttribute("lastSearchResult", searchMethode.invoke(classeInstance, primaryKey));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(findServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchMethodException ex) {
-            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(findServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SecurityException ex) {
-            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(findServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(findServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalArgumentException ex) {
-            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(findServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {
-            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(findServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+            Logger.getLogger(findServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        //processRequest(request, response);
+        request.getRequestDispatcher("accueil.jsp").forward(request, response);
     }
 
     /**

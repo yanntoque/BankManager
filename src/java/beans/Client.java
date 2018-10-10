@@ -11,7 +11,8 @@ import javax.persistence.*;
 /**
  * Classe représentant un client de la banque
  *
- * @author Valentin LECOUPLE & Yann Toqué
+ *  @author Valentin Lecouple
+ *  @author Yann Toqué
  */
 @Entity
 public class Client implements BeanInterface {

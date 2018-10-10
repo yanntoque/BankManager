@@ -15,7 +15,8 @@ import java.util.Date;
 /**
  * Class permettant de faire les tests
  *
- * @author Valentin Lecouple et Yann Toqué
+ *  @author Valentin Lecouple
+ *  @author Yann Toqué
  */
 public class Main {
 
@@ -42,17 +43,9 @@ public class Main {
         try {
      
             BankBranch bb = (BankBranch) DAOBankBranch.findByPrimaryKey(bankBranch, "4586");
-            System.out.println("main apres find");
-            bb.setAddress("adresse modifiée x2");
-            System.out.println("main apres setAddress");
+            bb.setAddress("adresse modifiée x4");
             DAOBankBranch.update(bb);
-            System.out.println("main apres update");
-
-            BankBranch bb2 = (BankBranch) DAOBankBranch.findByPrimaryKey(bankBranch2, "8565");
-            System.out.println(bb2.getAddress());
-            bb2.setAddress("Has been modified x2");
-            DAOBankBranch.delete(bb2);
-           
+            
             DAOBankBranch.close();
             DAOAccount.close();
             DAOClient.close();

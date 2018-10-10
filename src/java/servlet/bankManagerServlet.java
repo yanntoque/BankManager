@@ -83,11 +83,10 @@ public class bankManagerServlet extends HttpServlet {
             Method searchMethode;
             searchMethode = maClasse.getMethod("search", paramTypes);
 
-            Account obj = (Account) searchMethode.invoke(classeInstance, primaryKey);
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
 
-            out.println(obj.getIBAN());
+            out.println(searchMethode.invoke(classeInstance, primaryKey).toString());
         } catch (ClassNotFoundException ex ) {
             Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
             

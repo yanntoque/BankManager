@@ -88,4 +88,15 @@ public class Client implements BeanInterface {
     public Object getPrimaryKey() {
         return getClientNumber();
     }
+
+     @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(String.format("Nom: %s%s", this.getLastName(), System.lineSeparator()));
+        sb.append(String.format("Prénom : %s%s", this.getFirstName(), System.lineSeparator()));
+        sb.append(String.format("Date de naissance: %s%s", this.getBirthDate().toString(), System.lineSeparator()));
+               
+        return sb.toString();
+    }
 }

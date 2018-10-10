@@ -9,7 +9,9 @@ import javax.persistence.*;
 
 /**
  * Classe représentant un compte bancaire
- * @author Valentin LECOUPLE & Yann Toqué
+ * 
+ *  @author Valentin Lecouple
+ *  @author Yann Toqué
  */
 @Entity
 public class Account implements BeanInterface {
@@ -100,5 +102,18 @@ public class Account implements BeanInterface {
     @Override
     public Object getPrimaryKey() {
        return getAccountNumber();
+    }
+    
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(String.format("Account: %s%s", this.getAccountNumber(), System.lineSeparator()));
+        sb.append(String.format("BankBranch: %s%s", this.getBankBranch().toString(), System.lineSeparator()));
+        sb.append(String.format("IBAN: %s%s", this.getIBAN(), System.lineSeparator()));
+        sb.append(String.format("Label: %s%s", this.getLabel(), System.lineSeparator()));
+        sb.append(String.format("Total money: %s%s", this.getTotalMoney(), System.lineSeparator()));
+        
+        return sb.toString();
     }
 }

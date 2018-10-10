@@ -9,7 +9,8 @@ import javax.persistence.*;
 
 /**
  *
- * @author Valentin LECOUPLE & Yann Toqué
+ *  @author Valentin Lecouple
+ *  @author Yann Toqué
  */
 
 /**
@@ -58,5 +59,16 @@ public class BankBranch implements BeanInterface {
     @Override
     public Object getPrimaryKey() {
         return getCode();
+    }
+    
+        @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+                
+        sb.append(String.format("Code: %s%s", this.getCode(), System.lineSeparator()));
+        sb.append(String.format("Adresse: %s%s", this.getAddress(), System.lineSeparator()));
+
+        
+        return sb.toString();
     }
 }

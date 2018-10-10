@@ -11,6 +11,7 @@ import beans.BankBranch;
 import beans.Client;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,20 +71,40 @@ public class bankManagerServlet extends HttpServlet {
 
         String maClasseString = request.getParameter("class");
         String primaryKey = request.getParameter("pk");
+        System.out.println(maClasseString + primaryKey);
 
         Class maClasse;
         Class[] paramTypes = new Class[1];
         paramTypes[0] = String.class;
 
-        maClasse = Class.forName(maClasseString);
-        Method searchMethode = maClasse.getMethod("search", paramTypes);
+        try {
+            maClasse = Class.forName("Service."+maClasseString);
+            Object classeInstance = maClasse.newInstance();
+            Method searchMethode;
+            searchMethode = maClasse.getMethod("search", paramTypes);
 
-        Account obj = (Account)searchMethode.invoke(null, primaryKey);
+            Account obj = (Account) searchMethode.invoke(classeInstance, primaryKey);
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
 
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+            out.println(obj.getIBAN());
+        } catch (ClassNotFoundException ex ) {
+            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(bankManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } 
 
-        out.println(obj.getIBAN());
         //processRequest(request, response);
     }
 

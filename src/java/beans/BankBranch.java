@@ -9,7 +9,8 @@ import javax.persistence.*;
 
 /**
  *
- * @author Valentin LECOUPLE & Yann Toqué
+ *  @author Valentin Lecouple
+ *  @author Yann Toqué
  */
 
 /**

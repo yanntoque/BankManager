@@ -9,7 +9,9 @@ import javax.persistence.*;
 
 /**
  * Classe représentant un compte bancaire
- * @author Valentin LECOUPLE & Yann Toqué
+ * 
+ *  @author Valentin Lecouple
+ *  @author Yann Toqué
  */
 @Entity
 public class Account implements BeanInterface {

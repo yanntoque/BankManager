@@ -5,17 +5,20 @@
  */
 package DAO;
 
-import beans.BankBranch;
+import beans.BankBranch;    
 import javax.persistence.*;
 
 /**
  *
- * @author Lecouple Valentin & Yann Toqué
+ *  @author Valentin Lecouple
+ *  @author Yann Toqué
  */
 public class DAO<T> {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("BankManagerPU");
     EntityManager em = emf.createEntityManager();
+    
+    
     
     /**
      * Permet 

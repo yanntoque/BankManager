@@ -5,10 +5,21 @@
  */
 package Service;
 
+import DAO.DAO;
+import beans.BankBranch;
+
 /**
  *
  * @author Valentin LECOUPLE & Yann TOQUE
  */
 public class ServiceBankBranch {
+     DAO<BankBranch> DAOBankBranch;
     
+    public ServiceBankBranch(){
+        this.DAOBankBranch = new DAO();
+    }
+    
+    public BankBranch search(String pk){
+        return (BankBranch)this.DAOBankBranch.findByPrimaryKey(new BankBranch(), pk);
+    }
 }

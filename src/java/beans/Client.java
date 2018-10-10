@@ -6,6 +6,7 @@
 package beans;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 import javax.persistence.*;
 
 /**
@@ -25,7 +26,16 @@ public class Client implements BeanInterface {
     private String clientNumber;
 
     /**
-     * Nom de fammilee du client
+     * Collection des comptes du client
+     */
+    @ManyToMany
+    @JoinTable(name="client_accounts",
+            joinColumns = @JoinColumn(name="client_Number", referencedColumnName="clientNumber"),
+            inverseJoinColumns = @JoinColumn(name="account_Number", referencedColumnName="accountNumber"))
+    private Collection<Account> lstAccounts;
+    
+    /**
+     * Nom de famille du client
      */
     @Column(nullable = false)
     private String lastName;
@@ -49,11 +59,12 @@ public class Client implements BeanInterface {
     public Client() {
     }
 
-    public Client(String clientNumber, String lastName, String firstName, Timestamp birthDate) {
+    public Client(String clientNumber, String lastName, String firstName, Timestamp birthDate, Collection<Account> lstAccounts) {
         this.clientNumber = clientNumber;
         this.lastName = lastName;
         this.firstName = firstName;
         this.birthDate = birthDate;
+        this.lstAccounts = lstAccounts;
     }
 
     public void setClientNumber(String clientNumber) {
@@ -83,6 +94,15 @@ public class Client implements BeanInterface {
     public void setBirthDate(Timestamp birthDate) {
         this.birthDate = birthDate;
     }
+
+    public Collection<Account> getLstAccounts() {
+        return lstAccounts;
+    }
+
+    public void setLstAccounts(Collection<Account> lstAccounts) {
+        this.lstAccounts = lstAccounts;
+    }
+    
 
     @Override
     public Object getPrimaryKey() {

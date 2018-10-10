@@ -6,6 +6,7 @@
 package DAO;
 
 import beans.BankBranch;    
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -77,4 +78,13 @@ public class DAO<T> {
         return o;
     } 
 
+    /**
+     * Permet de récupérer tous les tuples d'une table 
+     * @param entity
+     * @return 
+     */
+    public  List<T> findAll(T entity){
+        List result =  em.createQuery(String.format("SELECT p FROM %s p", entity.getClass().getName()),entity.getClass()).getResultList();
+        return result;
+    }
 }

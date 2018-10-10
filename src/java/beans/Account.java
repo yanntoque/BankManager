@@ -5,6 +5,8 @@
  */
 package beans;
 
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -21,7 +23,13 @@ public class Account implements BeanInterface {
     @Id
     @Column(nullable = false, length = 11)
     private String accountNumber;
-  
+    
+    /**
+     * Collection des clients liés au compte
+     */
+    @ManyToMany(mappedBy="lstAccounts")
+    private Collection<Client> lstClients;
+    
     /**
      * Label du compte
      */
@@ -51,12 +59,14 @@ public class Account implements BeanInterface {
     public Account() {
     }
 
-    public Account(String accountNumber, String label, String IBAN, BankBranch bankBranch, double totalMoney) {
+    public Account(String accountNumber, String label, String IBAN, BankBranch bankBranch, double totalMoney, Collection<Client> lstClients) {
         this.accountNumber = accountNumber;
         this.label = label;
         this.IBAN = IBAN;
         this.bankBranch = bankBranch;
         this.totalMoney = totalMoney;
+        this.lstClients = lstClients;
+        
     }
 
     public String getAccountNumber() {
@@ -98,6 +108,16 @@ public class Account implements BeanInterface {
     public void setTotalMoney(double totalMoney) {
         this.totalMoney = totalMoney;
     }
+
+    public Collection<Client> getLstClients() {
+        return lstClients;
+    }
+
+    public void setLstClients(Collection<Client> lstClients) {
+        this.lstClients = lstClients;
+    }
+    
+    
 
     @Override
     public Object getPrimaryKey() {

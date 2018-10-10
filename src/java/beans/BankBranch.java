@@ -60,4 +60,15 @@ public class BankBranch implements BeanInterface {
     public Object getPrimaryKey() {
         return getCode();
     }
+    
+        @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+                
+        sb.append(String.format("Code: %s", this.getCode()));
+        sb.append(String.format("Adresse: %s", this.getAddress()));
+
+        
+        return sb.toString();
+    }
 }

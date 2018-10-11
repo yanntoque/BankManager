@@ -36,7 +36,11 @@
           Object lastSearchResult = (Object) request.getAttribute("lastSearchResult");
           if(lastSearchResult instanceof Account){%>
             <div>
-                %{lastSearchResult.accountNumber}
+                Account number: ${lastSearchResult.accountNumber} <br>
+                Label: ${lastSearchResult.label} <br>
+                IBAN: ${lastSearchResult.IBAN} <br>
+                Bankbranch code: ${lastSearchResult.banckbranch.code} <br>
+                Total money: ${lastSearchResult.totalMoney} <br>
             </div>
           <%
           }
@@ -45,7 +49,10 @@
           <%
           }
           else if(lastSearchResult instanceof BankBranch){%>
-          
+            <div>
+                Code: ${lastSearchResult.code} <br>
+                Address: ${lastSearchResult.address} <br>
+            </div>
           <%
           }
           else{%>

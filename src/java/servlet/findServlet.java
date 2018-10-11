@@ -85,9 +85,14 @@ public class findServlet extends HttpServlet {
             maClasse = Class.forName("Service." + maClasseString);
             Object classeInstance = maClasse.newInstance();
             Method searchMethode;
-            searchMethode = maClasse.getMethod("search", paramTypes);   
+            searchMethode = maClasse.getMethod("search", paramTypes);
+            Object obj = searchMethode.invoke(classeInstance, primaryKey);
             
-            request.setAttribute("lastSearchResult", searchMethode.invoke(classeInstance, primaryKey));
+            if(obj == null){
+                obj = "Aucun résultat pour cette recherche";
+            }
+            
+            request.setAttribute("lastSearchResult", obj);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(findServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchMethodException ex) {

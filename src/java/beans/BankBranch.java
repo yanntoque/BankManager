@@ -6,34 +6,37 @@
 package beans;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
- *  @author Valentin Lecouple
- *  @author Yann Toqué
+ * @author Valentin Lecouple
+ * @author Yann Toqué
  */
-
 /**
  * Cette classe correspond à l'Agence bancaire
  */
-@Entity
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BankBranch")
+@Entity
 public class BankBranch implements BeanInterface {
 
     /**
      * Clé primaire de l'entité BankBranch
      */
+    @XmlElement(name = "code")
     @Id
     @Column(nullable = false, length = 5)
-    @XmlElement(name = "code")
     private String code;
 
     /**
      * Adresse de la BankBranch
      */
+    @XmlElement(name = "address")
     @Column(nullable = false)
-    @XmlElement(name = "adress")
     private String address;
 
     public BankBranch() {
@@ -64,15 +67,14 @@ public class BankBranch implements BeanInterface {
     public Object getPrimaryKey() {
         return getCode();
     }
-    
-        @Override
-    public String toString(){
+
+    @Override
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-                
+
         sb.append(String.format("Code: %s%s", this.getCode(), System.lineSeparator()));
         sb.append(String.format("Adresse: %s%s", this.getAddress(), System.lineSeparator()));
 
-        
         return sb.toString();
     }
 }

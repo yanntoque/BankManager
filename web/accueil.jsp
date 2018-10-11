@@ -4,6 +4,8 @@
     Author     : Valentin Lecouple & Yann Toqué
 --%>
 
+<%@page import="beans.BankBranch"%>
+<%@page import="beans.Client"%>
 <%@page import="beans.Account"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
   
@@ -45,7 +47,12 @@
           <%
           }
           else if(lastSearchResult instanceof Client){%>
-          
+          <div>
+                Client number : ${lastSearchResult.clientNumber}
+                Lastname : ${lastSearchResult.lastName}
+                Firstname : ${lastSearchResult.firstName}
+                Date of birth : ${lastSearchResult.birthDate}
+            </div>
           <%
           }
           else if(lastSearchResult instanceof BankBranch){%>

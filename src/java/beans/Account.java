@@ -5,13 +5,11 @@
  */
 package beans;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * Classe représentant un compte bancaire
@@ -19,15 +17,14 @@ import javax.xml.bind.annotation.XmlType;
  * @author Valentin Lecouple
  * @author Yann Toqué
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Account")
+@XmlRootElement
+@XmlAccessorType(value = XmlAccessType.FIELD)
 @Entity
-public class Account implements BeanInterface {
+public class Account implements BeanInterface, Serializable {
 
-    /**
+    /** 
      * Numéro du compte. PK de la table
      */
-    @XmlElement(name = "accountNumber")
     @Id
     @Column(nullable = false, length = 11)
     private String accountNumber;
@@ -35,35 +32,31 @@ public class Account implements BeanInterface {
     /**
      * Collection des clients liés au compte
      */
-    @XmlElement(name = "lstClients")
+    @XmlTransient
     @ManyToMany(mappedBy = "lstAccounts")
     private Collection<Client> lstClients;
 
     /**
      * Label du compte
      */
-    @XmlElement(name = "label")
     @Column(nullable = false)
     private String label;
 
     /**
      * IBAN du compte. Maximum de 27 caractères
      */
-    @XmlElement(name = "IBAN")
     @Column(nullable = false, length = 27)
     private String IBAN;
 
     /**
      * Agence à laquelle le compte est lié
      */
-    @XmlElement(name = "bankBranch")
     @JoinColumn(nullable = false)
     private BankBranch bankBranch;
 
     /**
      * Somme d'argent présente sur le compte
      */
-    @XmlElement(name = "totalMoney")
     @Column(nullable = false)
     private double totalMoney;
 

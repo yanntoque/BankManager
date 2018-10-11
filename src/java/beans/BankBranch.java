@@ -5,10 +5,12 @@
  */
 package beans;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -19,15 +21,12 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * Cette classe correspond à l'Agence bancaire
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "BankBranch")
 @Entity
-public class BankBranch implements BeanInterface {
+public class BankBranch implements BeanInterface, Serializable {
 
     /**
      * Clé primaire de l'entité BankBranch
      */
-    @XmlElement(name = "code")
     @Id
     @Column(nullable = false, length = 5)
     private String code;
@@ -35,7 +34,6 @@ public class BankBranch implements BeanInterface {
     /**
      * Adresse de la BankBranch
      */
-    @XmlElement(name = "address")
     @Column(nullable = false)
     private String address;
 

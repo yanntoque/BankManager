@@ -17,6 +17,8 @@ import javax.persistence.*;
  * Cette classe correspond à l'Agence bancaire
  */
 @Entity
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "BankBranch")
 public class BankBranch implements BeanInterface {
 
     /**
@@ -24,12 +26,14 @@ public class BankBranch implements BeanInterface {
      */
     @Id
     @Column(nullable = false, length = 5)
+    @XmlElement(name = "code")
     private String code;
 
     /**
      * Adresse de la BankBranch
      */
     @Column(nullable = false)
+    @XmlElement(name = "adress")
     private String address;
 
     public BankBranch() {

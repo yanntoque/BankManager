@@ -34,8 +34,23 @@
         if(request.getAttribute("lastSearchResult") != null)
         {
           Object lastSearchResult = (Object) request.getAttribute("lastSearchResult");
-          if(lastSearchResult instanceof Account){
-              out.println("on passe dans instanceof");
+          if(lastSearchResult instanceof Account){%>
+            <div>
+                %{lastSearchResult.accountNumber}
+            </div>
+          <%
+          }
+          else if(lastSearchResult instanceof Client){%>
+          
+          <%
+          }
+          else if(lastSearchResult instanceof BankBranch){%>
+          
+          <%
+          }
+          else{%>
+          
+          <%
           }
         }
         %>

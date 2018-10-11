@@ -41,7 +41,7 @@
                 Account number: ${lastSearchResult.accountNumber} <br>
                 Label: ${lastSearchResult.label} <br>
                 IBAN: ${lastSearchResult.IBAN} <br>
-                Bankbranch code: ${lastSearchResult.banckbranch.code} <br>
+                Bankbranch code: ${lastSearchResult.bankBranch.code} <br>
                 Total money: ${lastSearchResult.totalMoney} <br>
             </div>
           <%
@@ -63,7 +63,9 @@
           <%
           }
           else{%>
-          
+            <div>
+                ${lastSearchResult}
+            </div>
           <%
           }
         }

@@ -8,6 +8,10 @@ package beans;
 import java.sql.Timestamp;
 import java.util.Collection;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Classe représentant un client de la banque
@@ -15,12 +19,15 @@ import javax.persistence.*;
  *  @author Valentin Lecouple
  *  @author Yann Toqué
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Client")
 @Entity
 public class Client implements BeanInterface {
 
     /**
      * Numéro du client. PK de la table
      */
+    @XmlElement(name="clientNumber")
     @Id
     @Column(nullable = false, length = 8)
     private String clientNumber;
@@ -28,6 +35,7 @@ public class Client implements BeanInterface {
     /**
      * Collection des comptes du client
      */
+    @XmlElement(name="lstAccounts")
     @ManyToMany
     @JoinTable(name="client_accounts",
             joinColumns = @JoinColumn(name="client_Number", referencedColumnName="clientNumber"),
@@ -37,18 +45,21 @@ public class Client implements BeanInterface {
     /**
      * Nom de famille du client
      */
+    @XmlElement(name="lastName")
     @Column(nullable = false)
     private String lastName;
 
     /**
      * Prénom du client
      */
+    @XmlElement(name="firstName")
     @Column(nullable = false)
     private String firstName;
 
     /**
      * Date de naissance du client
      */
+    @XmlElement(name="birthDate")
     @Column(nullable = false)
     private Timestamp birthDate;
 

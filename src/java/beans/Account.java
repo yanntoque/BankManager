@@ -8,54 +8,65 @@ package beans;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Classe représentant un compte bancaire
- * 
- *  @author Valentin Lecouple
- *  @author Yann Toqué
+ *
+ * @author Valentin Lecouple
+ * @author Yann Toqué
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Account")
 @Entity
 public class Account implements BeanInterface {
+
     /**
      * Numéro du compte. PK de la table
      */
+    @XmlElement(name = "accountNumber")
     @Id
     @Column(nullable = false, length = 11)
     private String accountNumber;
-    
+
     /**
      * Collection des clients liés au compte
      */
-    @ManyToMany(mappedBy="lstAccounts")
+    @XmlElement(name = "lstClients")
+    @ManyToMany(mappedBy = "lstAccounts")
     private Collection<Client> lstClients;
-    
+
     /**
      * Label du compte
      */
+    @XmlElement(name = "label")
     @Column(nullable = false)
     private String label;
-    
+
     /**
      * IBAN du compte. Maximum de 27 caractères
      */
+    @XmlElement(name = "IBAN")
     @Column(nullable = false, length = 27)
     private String IBAN;
-    
+
     /**
      * Agence à laquelle le compte est lié
      */
+    @XmlElement(name = "bankBranch")
     @JoinColumn(nullable = false)
     private BankBranch bankBranch;
-    
+
     /**
      * Somme d'argent présente sur le compte
      */
+    @XmlElement(name = "totalMoney")
     @Column(nullable = false)
     private double totalMoney;
 
-    
-    
     public Account() {
     }
 
@@ -66,7 +77,7 @@ public class Account implements BeanInterface {
         this.bankBranch = bankBranch;
         this.totalMoney = totalMoney;
         this.lstClients = lstClients;
-        
+
     }
 
     public String getAccountNumber() {
@@ -116,24 +127,22 @@ public class Account implements BeanInterface {
     public void setLstClients(Collection<Client> lstClients) {
         this.lstClients = lstClients;
     }
-    
-    
 
     @Override
     public Object getPrimaryKey() {
-       return getAccountNumber();
+        return getAccountNumber();
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        
+
         sb.append(String.format("Account: %s%s", this.getAccountNumber(), System.lineSeparator()));
         sb.append(String.format("BankBranch: %s%s", this.getBankBranch().toString(), System.lineSeparator()));
         sb.append(String.format("IBAN: %s%s", this.getIBAN(), System.lineSeparator()));
         sb.append(String.format("Label: %s%s", this.getLabel(), System.lineSeparator()));
         sb.append(String.format("Total money: %s%s", this.getTotalMoney(), System.lineSeparator()));
-        
+
         return sb.toString();
     }
 }

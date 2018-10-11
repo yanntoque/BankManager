@@ -5,19 +5,24 @@
  */
 package beans;
 
+import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
- *  @author Valentin Lecouple
- *  @author Yann Toqué
+ * @author Valentin Lecouple
+ * @author Yann Toqué
  */
-
 /**
  * Cette classe correspond à l'Agence bancaire
  */
 @Entity
-public class BankBranch implements BeanInterface {
+public class BankBranch implements BeanInterface, Serializable {
 
     /**
      * Clé primaire de l'entité BankBranch
@@ -60,15 +65,14 @@ public class BankBranch implements BeanInterface {
     public Object getPrimaryKey() {
         return getCode();
     }
-    
-        @Override
-    public String toString(){
+
+    @Override
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-                
+
         sb.append(String.format("Code: %s%s", this.getCode(), System.lineSeparator()));
         sb.append(String.format("Adresse: %s%s", this.getAddress(), System.lineSeparator()));
 
-        
         return sb.toString();
     }
 }

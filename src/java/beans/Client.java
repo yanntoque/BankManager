@@ -5,18 +5,27 @@
  */
 package beans;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Classe représentant un client de la banque
  *
- *  @author Valentin Lecouple
- *  @author Yann Toqué
+ * @author Valentin Lecouple
+ * @author Yann Toqué
  */
+@XmlRootElement
+@XmlAccessorType(value = XmlAccessType.FIELD)
 @Entity
-public class Client implements BeanInterface {
+public class Client implements BeanInterface, Serializable {
 
     /**
      * Numéro du client. PK de la table
@@ -28,12 +37,13 @@ public class Client implements BeanInterface {
     /**
      * Collection des comptes du client
      */
+    @XmlTransient
     @ManyToMany
-    @JoinTable(name="client_accounts",
-            joinColumns = @JoinColumn(name="client_Number", referencedColumnName="clientNumber"),
-            inverseJoinColumns = @JoinColumn(name="account_Number", referencedColumnName="accountNumber"))
+    @JoinTable(name = "client_accounts",
+            joinColumns = @JoinColumn(name = "client_Number", referencedColumnName = "clientNumber"),
+            inverseJoinColumns = @JoinColumn(name = "account_Number", referencedColumnName = "accountNumber"))
     private Collection<Account> lstAccounts;
-    
+
     /**
      * Nom de famille du client
      */
@@ -102,21 +112,20 @@ public class Client implements BeanInterface {
     public void setLstAccounts(Collection<Account> lstAccounts) {
         this.lstAccounts = lstAccounts;
     }
-    
 
     @Override
     public Object getPrimaryKey() {
         return getClientNumber();
     }
 
-     @Override
-    public String toString(){
+    @Override
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        
+
         sb.append(String.format("Nom: %s%s", this.getLastName(), System.lineSeparator()));
         sb.append(String.format("Prénom : %s%s", this.getFirstName(), System.lineSeparator()));
         sb.append(String.format("Date de naissance: %s%s", this.getBirthDate().toString(), System.lineSeparator()));
-               
+
         return sb.toString();
     }
 }

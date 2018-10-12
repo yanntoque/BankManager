@@ -43,6 +43,7 @@
                 IBAN: ${lastSearchResult.IBAN} <br>
                 Bankbranch code: ${lastSearchResult.bankBranch.code} <br>
                 Total money: ${lastSearchResult.totalMoney} <br>
+                <a href="deleteServlet?deleteClass=ServiceAccount&deletePk=${lastSearchResult.accountNumber}">Delete</a>
             </div>
           <%
           }
@@ -52,6 +53,7 @@
                 Lastname : ${lastSearchResult.lastName}
                 Firstname : ${lastSearchResult.firstName}
                 Date of birth : ${lastSearchResult.birthDate}
+                <a href="deleteServlet?deleteClass=ServiceClient&deletePk=${lastSearchResult.clientNumber}">Delete</a>
             </div>
           <%
           }
@@ -59,6 +61,7 @@
             <div>
                 Code: ${lastSearchResult.code} <br>
                 Address: ${lastSearchResult.address} <br>
+                <a href="deleteServlet?deleteClass=ServiceBankBranch&deletePk=${lastSearchResult.code}">Delete</a>
             </div>
           <%
           }

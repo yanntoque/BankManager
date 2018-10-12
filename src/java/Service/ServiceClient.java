@@ -22,4 +22,8 @@ public class ServiceClient {
     public Client search(String pk) {
         return (Client) this.DAOClient.findByPrimaryKey(new Client(), pk);
     }
+    
+    public void delete(String pk){
+        this.DAOClient.delete((Client)this.DAOClient.findByPrimaryKey(new Client(), pk));
+    }
 }

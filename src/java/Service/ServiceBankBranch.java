@@ -22,4 +22,8 @@ public class ServiceBankBranch {
     public BankBranch search(String pk){
         return (BankBranch)this.DAOBankBranch.findByPrimaryKey(new BankBranch(), pk);
     }
+    
+    public void delete(String pk){
+        this.DAOBankBranch.delete((BankBranch)this.DAOBankBranch.findByPrimaryKey(new BankBranch(), pk));
+    }
 }

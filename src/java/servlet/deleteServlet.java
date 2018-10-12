@@ -5,18 +5,10 @@
  */
 package servlet;
 
-import DAO.DAO;
-import beans.Account;
-import beans.BankBranch;
-import beans.Client;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -27,38 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Valentin Lecouple
- * @author Yann Toqué
- *
+ * @author Valentin
  */
-@WebServlet(name = "findServlet", urlPatterns = {"/findServlet"})
-public class findServlet extends HttpServlet {
+@WebServlet(name = "deleteServlet", urlPatterns = {"/deleteServlet"})
+public class deleteServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet bankManagerServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet bankManagerServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -72,9 +37,9 @@ public class findServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String maClasseString = request.getParameter("rechercheClass");
-        String primaryKey = request.getParameter("recherchePk");
+        
+        String maClasseString = request.getParameter("deleteClass");
+        String primaryKey = request.getParameter("deletePk");
         System.out.println(maClasseString + primaryKey);
 
         Class maClasse;
@@ -85,14 +50,9 @@ public class findServlet extends HttpServlet {
             maClasse = Class.forName("Service." + maClasseString);
             Object classeInstance = maClasse.newInstance();
             Method searchMethode;
-            searchMethode = maClasse.getMethod("search", paramTypes);
-            Object obj = searchMethode.invoke(classeInstance, primaryKey);
+            Method deleteMethode = maClasse.getMethod("delete", paramTypes);
+            deleteMethode.invoke(classeInstance, primaryKey);
             
-            if(obj == null){
-                obj = "Aucun résultat pour cette recherche";
-            }
-            
-            request.setAttribute("lastSearchResult", obj);
         } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException ex) {
             Logger.getLogger(findServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -111,7 +71,6 @@ public class findServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

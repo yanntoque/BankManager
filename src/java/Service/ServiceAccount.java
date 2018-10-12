@@ -22,4 +22,8 @@ public class ServiceAccount {
     public Account search(String pk){
         return (Account)this.DAOAccount.findByPrimaryKey(new Account(), pk);
     }
+    
+    public void delete(String pk){
+        this.DAOAccount.delete((Account)this.DAOAccount.findByPrimaryKey(new Account(), pk));
+    }
 }

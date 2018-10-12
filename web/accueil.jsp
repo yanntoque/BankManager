@@ -49,10 +49,10 @@
           }
           else if(lastSearchResult instanceof Client){%>
           <div>
-                Client number : ${lastSearchResult.clientNumber}
-                Lastname : ${lastSearchResult.lastName}
-                Firstname : ${lastSearchResult.firstName}
-                Date of birth : ${lastSearchResult.birthDate}
+              Client number : ${lastSearchResult.clientNumber}<br>
+              Lastname : ${lastSearchResult.lastName}<br>
+              Firstname : ${lastSearchResult.firstName}<br>
+              Date of birth : ${lastSearchResult.birthDate}<br>
                 <a href="deleteServlet?deleteClass=ServiceClient&deletePk=${lastSearchResult.clientNumber}">Delete</a>
             </div>
           <%

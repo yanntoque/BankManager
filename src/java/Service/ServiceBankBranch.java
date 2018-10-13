@@ -26,4 +26,9 @@ public class ServiceBankBranch {
     public void delete(String pk){
         this.DAOBankBranch.delete((BankBranch)this.DAOBankBranch.findByPrimaryKey(new BankBranch(), pk));
     }
+    
+    public void create(String code, String address) throws Exception{
+        BankBranch newBanckBranch = new BankBranch(code, address);
+        this.DAOBankBranch.create(newBanckBranch);
+    }
 }

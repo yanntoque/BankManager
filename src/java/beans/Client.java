@@ -8,6 +8,7 @@ package beans;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -60,7 +61,7 @@ public class Client implements BeanInterface, Serializable {
      * Date de naissance du client
      */
     @Column(nullable = false)
-    private Timestamp birthDate;
+    private Date birthDate;
 
     public String getClientNumber() {
         return clientNumber;
@@ -69,7 +70,7 @@ public class Client implements BeanInterface, Serializable {
     public Client() {
     }
 
-    public Client(String clientNumber, String lastName, String firstName, Timestamp birthDate, Collection<Account> lstAccounts) {
+    public Client(String clientNumber, String lastName, String firstName, Date birthDate, Collection<Account> lstAccounts) {
         this.clientNumber = clientNumber;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -97,7 +98,7 @@ public class Client implements BeanInterface, Serializable {
         this.firstName = firstName;
     }
 
-    public Timestamp getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 

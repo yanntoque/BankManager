@@ -7,6 +7,9 @@ package Service;
 
 import DAO.DAO;
 import beans.Client;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -25,5 +28,11 @@ public class ServiceClient {
     
     public void delete(String pk){
         this.DAOClient.delete((Client)this.DAOClient.findByPrimaryKey(new Client(), pk));
+    }
+    
+    public void create(String clientNumber, String lastName, String firstName, String birthDate) throws ParseException, Exception{
+        Date newDate = new SimpleDateFormat("yyyy-MM-dd").parse(birthDate);
+        Client newClient = new Client(clientNumber, lastName, firstName, newDate, null);
+        this.DAOClient.create(newClient);
     }
 }

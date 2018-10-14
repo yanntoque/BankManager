@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Valentin
+ * Servlet permettant la création d'un client selon les informations entrées par un utilisateur
+ * @author Valentin LECOUPLE & Yann TOQUE
  */
 @WebServlet(name = "createClientServlet", urlPatterns = {"/createClientServlet"})
 public class createClientServlet extends HttpServlet {
@@ -36,18 +36,22 @@ public class createClientServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        //on récupère les informations entrées par l'utilisateur
         String clientNumber = request.getParameter("clientNumber");
         String clientFirstname = request.getParameter("clientFirstname");
         String clientLastname = request.getParameter("clientLastname");
         String clientDate = request.getParameter("clientDate");
 
+        //On instancie une classe de service pour procéder aux traitements
         ServiceClient serviceClient = new ServiceClient();
         try {
+            //On appelle la classe de service pour créer un nouvel objet dans la BDD
             serviceClient.create(clientNumber, clientLastname, clientFirstname, clientDate);
         } catch (Exception ex) {
             Logger.getLogger(createClientServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        //On redirige vers la page d'accueil
         request.getRequestDispatcher("accueil.jsp").forward(request, response);
     }
 

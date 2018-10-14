@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet permettant de mettre à jour un objet bankBranch dans la BDD
  * @author Valentin Lecouple 
  * @author Yann Toqué
  */
@@ -34,10 +34,11 @@ public class updateBankBranchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //On récupère l'action à effectuer: soit on cherche toutes les bankBranch modifiables pour les afficher à l'utilisateur, soit on en modifie une en particuleir
         String action = request.getParameter("action");
         ServiceBankBranch serviceBankBranch = new ServiceBankBranch();
 
-        if ("searchAllBankBranch".equals(action)) {
+        if (action.equals("searchAllBankBranch")) {
             request.setAttribute("bankBranchList", serviceBankBranch.getAll());
             request.getRequestDispatcher("updateBankBranch.jsp").forward(request, response);
         } else {

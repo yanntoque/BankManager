@@ -10,7 +10,7 @@ import java.util.List;
 import javax.persistence.*;
 
 /**
- *
+ *  Classe DAO générique permettant de traiter les beans, quels qu'ils soient
  *  @author Valentin Lecouple
  *  @author Yann Toqué
  */
@@ -22,7 +22,7 @@ public class DAO<T> {
     
     
     /**
-     * Permet 
+     * Permet de fermer la connexion de l'entity manager
      */
     public void close(){
         em.close();

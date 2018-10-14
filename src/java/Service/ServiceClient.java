@@ -10,6 +10,7 @@ import beans.Client;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -35,5 +36,18 @@ public class ServiceClient {
         Date newDate = new SimpleDateFormat("dd-MM-yyyy").parse(birthDate);
         Client newClient = new Client(clientNumber, lastName, firstName, newDate, null);
         this.DAOClient.create(newClient);
+    }
+
+    public List<Client> getAll() {
+        return this.DAOClient.findAll(new Client());
+    }
+
+    public void update(String clientNumber, String lastName, String firstName, String birthDate) throws ParseException {
+        Date newDate = new SimpleDateFormat("dd-MM-yyyy").parse(birthDate);
+        Client clientToUpdate = (Client) this.DAOClient.findByPrimaryKey(new Client(), clientNumber);
+        clientToUpdate.setBirthDate(newDate);
+        clientToUpdate.setFirstName(firstName);
+        clientToUpdate.setLastName(lastName);
+        this.DAOClient.update(clientToUpdate);
     }
 }

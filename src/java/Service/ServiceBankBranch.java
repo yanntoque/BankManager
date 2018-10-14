@@ -7,6 +7,7 @@ package Service;
 
 import DAO.DAO;
 import beans.BankBranch;
+import java.util.List;
 
 /**
  *
@@ -30,5 +31,15 @@ public class ServiceBankBranch {
     public void create(String code, String address) throws Exception{
         BankBranch newBanckBranch = new BankBranch(code, address);
         this.DAOBankBranch.create(newBanckBranch);
+    }
+    
+    public List<BankBranch> getAll(){
+        return this.DAOBankBranch.findAll(new BankBranch());
+    }
+    
+    public void update(String bankBranchCode, String bankBranchNewAddress){
+        BankBranch bankBranchToUpdate = (BankBranch)this.DAOBankBranch.findByPrimaryKey(new BankBranch(), bankBranchCode);
+        bankBranchToUpdate.setAddress(bankBranchNewAddress);
+        this.DAOBankBranch.update(bankBranchToUpdate);
     }
 }

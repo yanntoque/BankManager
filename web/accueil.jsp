@@ -16,7 +16,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Mettre à jour une BankBranch</h1>
+            <a href="updateBankBranchServlet?action=searchAllBankBranch">Update</a>
+        <h1>Recherche par clé primaire</h1>
         <div id="recherche">
             <form id="rechercheForm" action="findServlet">
                 <select id="rechercheClass" name="rechercheClass">

@@ -16,10 +16,14 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <h1>Création</h1>
+        <a href="create.jsp">Formulaires</a>
         <h1>Mettre à jour une BankBranch</h1>
         <a href="updateBankBranchServlet?action=searchAllBankBranch">Update</a>
         <h1>Mettre à jour un Client</h1>
         <a href="updateClientServlet?action=searchAllClient">Update</a>
+        <h1>Mettre à jour un Account</h1>
+        <a href="updateAccountServlet?action=searchAllAccount">Update</a>
         <h1>Recherche par clé primaire</h1>
         <div id="recherche">
             <form id="rechercheForm" action="findServlet">
@@ -46,7 +50,7 @@
             <a href="deleteServlet?deleteClass=ServiceAccount&deletePk=${lastSearchResult.accountNumber}">Delete</a>
         </div>
         <%
-          } else if (lastSearchResult instanceof Client) {%>
+        } else if (lastSearchResult instanceof Client) {%>
         <div>
             Client number : ${lastSearchResult.clientNumber}<br>
             Lastname : ${lastSearchResult.lastName}<br>
@@ -55,14 +59,14 @@
             <a href="deleteServlet?deleteClass=ServiceClient&deletePk=${lastSearchResult.clientNumber}">Delete</a>
         </div>
         <%
-          } else if (lastSearchResult instanceof BankBranch) {%>
+        } else if (lastSearchResult instanceof BankBranch) {%>
         <div>
             Code: ${lastSearchResult.code} <br>
             Address: ${lastSearchResult.address} <br>
             <a href="deleteServlet?deleteClass=ServiceBankBranch&deletePk=${lastSearchResult.code}">Delete</a>
         </div>
         <%
-          } else {%>
+        } else {%>
         <div>
             ${lastSearchResult}
         </div>

@@ -39,7 +39,7 @@ public class updateAccountServlet extends HttpServlet {
 
         ServiceAccount serviceAccount = new ServiceAccount();
 
-        if ("searchAllClient".equals(action)) {
+        if ("searchAllAccount".equals(action)) {
             request.setAttribute("accountList", serviceAccount.getAll());
             request.getRequestDispatcher("updateAccount.jsp").forward(request, response);
         } else {

@@ -19,14 +19,14 @@
         <form id="updateForm" action="updateAccountServlet?action=updateAccount">
             <label>Compte à modifier :</label><select name="accountNumber">
                 <%  for (Account account : accountList) {%>
-                <option value="<%=account.getAccountNumber()%>">Account Number : <%=account.getAccountNumber()%> | Label : <%=client.getLabel()%> | IBAN : <%=client.getIBAN()%> | Total Money : <%=client.getTotalMoney()%></option>
+                <option value="<%=account.getAccountNumber()%>">Account Number : <%=account.getAccountNumber()%> | Label : <%=account.getLabel()%> | IBAN : <%=account.getIBAN()%> | Total Money : <%=account.getTotalMoney()%></option>
                 <%}
                 %>
             </select>
             <br>
             <label>Nouveau Label :</label><input type="text" name="accountLabel" /> 
-            <label>Nouvel IBAN :</label><input type="text" name="accountIBAN" /> 
-            <label>Nouvelle somme d'argent :</label><input type="text" name="accountTotalMoney" /> 
+            <label>Nouvel IBAN :</label><input type="text" maxlength="27" type="text" name="accountIBAN" /> 
+            <label>Nouvelle somme d'argent :</label><input type="text" type="number" step="any" name="accountTotalMoney" /> 
             <input type="submit" value="Valider">
         </form>
     </body>

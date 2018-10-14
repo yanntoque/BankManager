@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Class permettant de faire les tests
+ * Classe permettant de faire les tests sur chacune des classes implémentées
  *
  * @author Valentin Lecouple
  * @author Yann Toqué

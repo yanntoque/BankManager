@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet permettant de créer un objet Account dans la BDD après remplissage d'un formulaire adapté par un utilisateur
  * @author Valentin LECOUPLE
  * @author Yann TOQUE
  */
@@ -36,20 +36,23 @@ public class createAccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //On récupère les informations entrées par l'utilisateur
         String accountNumber = request.getParameter("accountNumber");
         String accountLabel = request.getParameter("accountLabel");
         String accountIBAN = request.getParameter("accountIBAN");
         String accountBankBranchCode = request.getParameter("accountBankBranchCode");
         String accountTotalMoney = request.getParameter("accountTotalMoney");
 
+        //On instancie une classe de service pour procéder aux traitements
         ServiceAccount serviceAccount = new ServiceAccount();
         try {
-
+            //On demande à la classe de servicede créer un objet dans la BDD
             serviceAccount.create(accountNumber, accountLabel, accountIBAN, accountBankBranchCode, Double.valueOf(accountTotalMoney));
         } catch (Exception ex) {
             Logger.getLogger(createAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        //On redirige vers la page d'accueil
         request.getRequestDispatcher("accueil.jsp").forward(request, response);
     }
 

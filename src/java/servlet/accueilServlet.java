@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Yann
+ * Servlet d'accueil sur laquel l'utilisateur arrivera dès l'ouverture de l'application
+ * @author Yann TOQUE & Valentin LECOUPLE
  */
 @WebServlet(name = "accueilServlet", urlPatterns = {"/accueilServlet"})
 public class accueilServlet extends HttpServlet {

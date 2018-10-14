@@ -5,7 +5,7 @@
  */
 package servlet;
 
-import Service.ServiceBankBranch;
+import Service.ServiceAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,12 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet permettant de mettre à jour un objet bankBranch dans la BDD
- * @author Valentin Lecouple 
+ * Servlet permettant de mettre à jour les données d'un Account
+ *
+ * @author Valentin Lecouple
  * @author Yann Toqué
  */
-@WebServlet(name = "updateBankBranchServlet", urlPatterns = {"/updateBankBranchServlet"})
-public class updateBankBranchServlet extends HttpServlet {
+@WebServlet(name = "updateAccountServlet", urlPatterns = {"/updateAccountServlet"})
+public class updateAccountServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -34,21 +35,24 @@ public class updateBankBranchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //On récupère l'action à effectuer: soit on cherche toutes les bankBranch modifiables pour les afficher à l'utilisateur, soit on en modifie une en particulier
         String action = request.getParameter("action");
-        ServiceBankBranch serviceBankBranch = new ServiceBankBranch();
 
-        if (action.equals("searchAllBankBranch")) {
-            request.setAttribute("bankBranchList", serviceBankBranch.getAll());
-            request.getRequestDispatcher("updateBankBranch.jsp").forward(request, response);
+        ServiceAccount serviceAccount = new ServiceAccount();
+
+        if ("searchAllClient".equals(action)) {
+            request.setAttribute("accountList", serviceAccount.getAll());
+            request.getRequestDispatcher("updateAccount.jsp").forward(request, response);
         } else {
-            String bankBranchCode = request.getParameter("bankBranchCode");
-            String bankBranchNewAdress = request.getParameter("bankBranchNewAddress");
-            System.out.println("Servlet " + bankBranchCode + bankBranchCode);
-            serviceBankBranch.update(bankBranchCode, bankBranchNewAdress);
+            String accountNumber = request.getParameter("accountNumber");
+            String accountLabel = request.getParameter("accountLabel");
+            String accountIBAN = request.getParameter("accountIBAN");
+            String accountTotalMoney = request.getParameter("accountTotalMoney");
+            double accountTotalMoneyDouble = Double.valueOf(accountTotalMoney);
+
+            serviceAccount.update(accountNumber, accountLabel, accountIBAN, accountTotalMoneyDouble);
+            
             request.getRequestDispatcher("accueil.jsp").forward(request, response);
         }
-
     }
 
     /**

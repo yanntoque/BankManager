@@ -8,9 +8,10 @@ package Service;
 import DAO.DAO;
 import beans.Account;
 import beans.BankBranch;
+import java.util.List;
 
 /**
- *  Classe de service permettant de faire le lien entre une servlet et la classe de DAO
+ *  Classe de service permettant de faire le lien entre une servlet traitant un account et la classe de DAO
  * @author Valentin LECOUPLE & Yann TOQUE
  */
 public class ServiceAccount {
@@ -55,5 +56,26 @@ public class ServiceAccount {
         BankBranch accountBankBranch = (BankBranch)this.DAOBankBranch.findByPrimaryKey(new BankBranch(), bankBranchCode);
         Account newAccount = new Account(accountNumber, label, IBAN, accountBankBranch, totalMoney, null);
         this.DAOAccount.create(newAccount);
+    }
+    
+     /**
+     * Méthode permettant de récupérer toutes les entrées de la table account avec le DAO
+     * @return Retourne la liste de tous les account enregistrées dans la BDD
+     */
+    public List<Account> getAll(){
+        return this.DAOAccount.findAll(new Account());
+    }
+    
+     /**
+     * Méthode permettant de mettre à jour un account avec le DAO
+     * @param bankBranchCode Clé primaire de la bankBranch à mettre à jour
+     * @param bankBranchNewAddress Nouvelle valeur à associer à la bankBranch choisie
+     */
+    public void update(String accountNumber, String newLabel, String newIBAN, double newTotalMoney){
+        Account accountToUpdate = (Account)DAOAccount.findByPrimaryKey(new Account(), accountNumber);
+        accountToUpdate.setLabel(newLabel);
+        accountToUpdate.setIBAN(newIBAN);
+        accountToUpdate.setTotalMoney(newTotalMoney);
+        this.DAOAccount.update(accountToUpdate);
     }
 }

@@ -11,11 +11,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update BankBranch Page</title>
+        <title>Update Client Page</title>
     </head>
     <body>
         <%List<Client> clientList = (List<Client>) request.getAttribute("clientList");%>
-        <h1>Mise à jour de l'adresse d'un Client</h1>
+        <h1>Mise à jour des données d'un Client</h1>
         <form id="updateForm" action="updateClientServlet?action=updateClient">
             <label>Client à modifier :</label><select name="clientNumber">
                 <%  for (Client client : clientList) {%>

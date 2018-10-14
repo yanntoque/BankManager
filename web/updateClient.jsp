@@ -24,8 +24,8 @@
                 %>
             </select>
             <br>
-            <label>Nouveau Nom :</label><input type="text" name="clientNewFirstname" /> 
-            <label>Nouveau Prénom :</label><input type="text" name="clientNewLastname" /> 
+            <label>Nouveau Prénom :</label><input type="text" name="clientNewFirstname" /> 
+            <label>Nouveau Nom :</label><input type="text" name="clientNewLastname" /> 
             <label>Nouvelle Date de naissance :</label><input placeholder="28-06-1971" type="text" name="clientNewBirthdate" /> 
             <input type="submit" value="Valider">
         </form>

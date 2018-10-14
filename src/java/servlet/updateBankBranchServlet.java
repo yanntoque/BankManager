@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Valentin
+ * @author Valentin Lecouple 
+ * @author Yann Toqué
  */
 @WebServlet(name = "updateBankBranchServlet", urlPatterns = {"/updateBankBranchServlet"})
 public class updateBankBranchServlet extends HttpServlet {
@@ -35,21 +36,18 @@ public class updateBankBranchServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         ServiceBankBranch serviceBankBranch = new ServiceBankBranch();
-        
-        switch(action){
-                case "searchAllBankBranch":
-                    request.setAttribute("bankBranchList", serviceBankBranch.getAll());
-                    break;
-                case "updateBankBranch":
-                    String bankBranchCode = request.getParameter("bankBranchCode");
-                    String bankBranchNewAdress = request.getParameter("bankBranchNewAddress");
-                    serviceBankBranch.update(bankBranchCode, bankBranchNewAdress);
-                    break;
-                default:
-                    break;
+
+        if ("searchAllBankBranch".equals(action)) {
+            request.setAttribute("bankBranchList", serviceBankBranch.getAll());
+            request.getRequestDispatcher("updateBankBranch.jsp").forward(request, response);
+        } else {
+            String bankBranchCode = request.getParameter("bankBranchCode");
+            String bankBranchNewAdress = request.getParameter("bankBranchNewAddress");
+            System.out.println("Servlet " + bankBranchCode + bankBranchCode);
+            serviceBankBranch.update(bankBranchCode, bankBranchNewAdress);
+            request.getRequestDispatcher("accueil.jsp").forward(request, response);
         }
-        
-        request.getRequestDispatcher("accueil.jsp").forward(request, response);
+
     }
 
     /**

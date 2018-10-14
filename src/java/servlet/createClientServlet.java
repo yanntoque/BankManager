@@ -8,6 +8,8 @@ package servlet;
 import Service.ServiceClient;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +35,20 @@ public class createClientServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        String clientNumber = request.getParameter("clientNumber");
+        String clientFirstname = request.getParameter("clientFirstname");
+        String clientLastname = request.getParameter("clientLastname");
+        String clientDate = request.getParameter("clientDate");
+
+        ServiceClient serviceClient = new ServiceClient();
+        try {
+            serviceClient.create(clientNumber, clientLastname, clientFirstname, clientDate);
+        } catch (Exception ex) {
+            Logger.getLogger(createClientServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        request.getRequestDispatcher("accueil.jsp").forward(request, response);
     }
 
     /**
@@ -47,15 +62,6 @@ public class createClientServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String clientNumber = request.getParameter("clientNumber");
-        String clientFirstname = request.getParameter("clientFirstname");
-        String clientLastname = request.getParameter("clientLastname");
-        String clientDate = request.getParameter("clientDate");
-        
-        ServiceClient serviceClient = new ServiceClient();
-        serviceClient.create(clientNumber, clientLastname, clientFirstname, clientDate);
-        
-        request.getRequestDispatcher("accueil.jsp").forward(request, response);
     }
 
     /**

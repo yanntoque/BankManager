@@ -61,6 +61,7 @@ public class Client implements BeanInterface, Serializable {
      * Date de naissance du client
      */
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
 
     public String getClientNumber() {

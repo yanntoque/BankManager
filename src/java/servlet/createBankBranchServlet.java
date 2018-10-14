@@ -8,6 +8,8 @@ package servlet;
 import Service.ServiceBankBranch;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +39,11 @@ public class createBankBranchServlet extends HttpServlet {
         String bankBranchAdress = request.getParameter("bankBranchAdress");
 
         ServiceBankBranch serviceBankBranch = new ServiceBankBranch();
-        serviceBankBranch.create(bankBranchCode, bankBranchAdress);
+        try {
+            serviceBankBranch.create(bankBranchCode, bankBranchAdress);
+        } catch (Exception ex) {
+            Logger.getLogger(createBankBranchServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         request.getRequestDispatcher("accueil.jsp").forward(request, response);
     }

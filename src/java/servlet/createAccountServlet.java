@@ -8,6 +8,8 @@ package servlet;
 import Service.ServiceAccount;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,11 +40,16 @@ public class createAccountServlet extends HttpServlet {
         String accountLabel = request.getParameter("accountLabel");
         String accountIBAN = request.getParameter("accountIBAN");
         String accountBankBranchCode = request.getParameter("accountBankBranchCode");
-        double accountTotalMoney = request.getParameter("accountTotalMoney");
-        
+        String accountTotalMoney = request.getParameter("accountTotalMoney");
+
         ServiceAccount serviceAccount = new ServiceAccount();
-        serviceAccount.create(accountNumber, accountLabel, accountIBAN, accountBankBranchCode, accountTotalMoney);
-        
+        try {
+
+            serviceAccount.create(accountNumber, accountLabel, accountIBAN, accountBankBranchCode, Double.valueOf(accountTotalMoney));
+        } catch (Exception ex) {
+            Logger.getLogger(createAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         request.getRequestDispatcher("accueil.jsp").forward(request, response);
     }
 

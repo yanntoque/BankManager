@@ -16,6 +16,7 @@ import java.util.Date;
  * @author Valentin LECOUPLE & Yann TOQUE
  */
 public class ServiceClient {
+
     DAO<Client> DAOClient;
 
     public ServiceClient() {
@@ -25,13 +26,13 @@ public class ServiceClient {
     public Client search(String pk) {
         return (Client) this.DAOClient.findByPrimaryKey(new Client(), pk);
     }
-    
-    public void delete(String pk){
-        this.DAOClient.delete((Client)this.DAOClient.findByPrimaryKey(new Client(), pk));
+
+    public void delete(String pk) {
+        this.DAOClient.delete((Client) this.DAOClient.findByPrimaryKey(new Client(), pk));
     }
-    
-    public void create(String clientNumber, String lastName, String firstName, String birthDate) throws ParseException, Exception{
-        Date newDate = new SimpleDateFormat("yyyy-MM-dd").parse(birthDate);
+
+    public void create(String clientNumber, String lastName, String firstName, String birthDate) throws ParseException, Exception {
+        Date newDate = new SimpleDateFormat("dd-MM-yyyy").parse(birthDate);
         Client newClient = new Client(clientNumber, lastName, firstName, newDate, null);
         this.DAOClient.create(newClient);
     }

@@ -10,6 +10,8 @@ import beans.Account;
 import beans.Client;
 import beans.BankBranch;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -23,24 +25,26 @@ import java.util.List;
  */
 public class Main {
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws ParseException {
         /*
         Example
          */
 
- /*DAO*/
+        /*DAO*/
         DAO<BankBranch> DAOBankBranch = new DAO();
         DAO<Account> DAOAccount = new DAO();
         DAO<Client> DAOClient = new DAO();
 
-        Date date = new Date();
-        Timestamp dateNow = new Timestamp(date.getTime());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String dateInString = "11-11-1994";
+        Date date = formatter.parse(dateInString);
+
         /*Objects*/
         BankBranch bankBranch = new BankBranch("4586", "10 rue de la banque postale");
         BankBranch bankBranch2 = new BankBranch("8565", "3 rue de la pompe");
 
-        Client client = new Client("10025", "Jobs", "Steve", dateNow, null);
-        Client client2 = new Client("12345", "Tordvalds", "Linus", dateNow, null);
+        Client client = new Client("10025", "Jobs", "Steve", date, null);
+        Client client2 = new Client("12345", "Tordvalds", "Linus", date, null);
 
         Collection<Client> lstClients = new ArrayList<>();
         lstClients.add(client);
@@ -68,7 +72,7 @@ public class Main {
             client.setLstAccounts(lstAccount);
             lstAccount.add(account2);
             client2.setLstAccounts(lstAccount);
-            
+
             DAOClient.update(client);
             DAOClient.update(client2);
 
@@ -79,7 +83,7 @@ public class Main {
             DAOBankBranch.close();
             DAOAccount.close();
             DAOClient.close();
-            
+
         } catch (Exception e) {
             System.err.println("Impossible de créer un tuple.");
         }

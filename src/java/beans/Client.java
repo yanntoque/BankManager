@@ -103,7 +103,7 @@ public class Client implements BeanInterface, Serializable {
         return birthDate;
     }
 
-    public void setBirthDate(Timestamp birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 

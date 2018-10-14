@@ -25,7 +25,7 @@
                 %>
             </select>
             <label>Nouvelle adresse :</label><input type="text" name="bankBranchNewAddress" /> 
-            <input type="submit" value="Valide">
+            <input type="submit" value="Valider">
         </form>
     </body>
 </html>
